@@ -476,6 +476,7 @@ object AllRules {
                 (it.countHandCards(Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME)) * 5
             }
         ),
+        /*
         collector to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
                 mapOf(
@@ -487,6 +488,27 @@ object AllRules {
                     8 to 100,
                     9 to 100
                 )[it.largestSuitWithDifferentNames()] ?: 0
+            }
+        ),
+         */
+        collector to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                val suits = it.countSuitsWithDifferentNames()
+                val scoreMap = mapOf(
+                    3 to 10,
+                    4 to 40,
+                    5 to 100,
+                    6 to 100,
+                    7 to 100,
+                    8 to 100,
+                    9 to 100
+                )
+                var score = 0
+
+                for(size in suits) {
+                    score += scoreMap[size] ?: 0
+                }
+                score
             }
         ),
         beastmaster to listOf(

@@ -127,6 +127,12 @@ class Game(val noScoring: Boolean = false) {
             .map { it.value.size }.maxOrNull() ?: 0
     }
 
+    fun countSuitsWithDifferentNames(): List<Int> {
+        return groupNotBlankedCardsBySuit()
+            .map { entry -> entry.key to entry.value.distinct() }.toMap()
+            .map { it.value.size }
+    }
+
     fun calculate() {
         handCards.forEach { card -> card.clear() }
 
