@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.Strings
 import com.klamerek.fantasyrealms.databinding.ActivityPlayerSelectionBinding
 import com.klamerek.fantasyrealms.databinding.PlayerListItemBinding
 import com.klamerek.fantasyrealms.game.DiscardArea
@@ -99,9 +100,9 @@ class PlayerSelectionActivity : CustomActivity() {
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
-        binding.playersView.scheduleLayoutAnimation();
-        binding.discardItem.scoreLabel.text =
-            "" + DiscardArea.instance.game().actualHandSize() + " card(s)"
+        binding.playersView.scheduleLayoutAnimation()
+        val text = Strings.get(R.string.x_cards, DiscardArea.instance.game().actualHandSize())
+        binding.discardItem.scoreLabel.text = text
     }
 
     override fun onDestroy() {
