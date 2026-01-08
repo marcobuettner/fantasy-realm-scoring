@@ -6,7 +6,6 @@ import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Constants.MAX_HAND_SIZE
 import com.klamerek.fantasyrealms.util.Preferences
 import kotlin.math.min
-import kotlin.math.max
 
 /**
  * List of cards (player hand) wth scoring calculation
@@ -105,27 +104,6 @@ class Game(val noScoring: Boolean = false) {
         .map { it.name() }.containsAll(cardExpected.toList().map { it.name() })
 
     /**
-     * Old method for counting a street for Gem Of Order
-     * @deprecated
-     */
-    fun longestSuite(): Int {
-        val sorted = handCardsNotBlanked().sortedBy { card -> card.value() }
-        var maxCount = 1
-        var count = 1
-        var previousValue = Int.MIN_VALUE
-        for (card in sorted) {
-            if (card.value() == (previousValue + 1)) {
-                count += 1
-            } else if (card.value() != previousValue) {
-                count = 1
-            }
-            maxCount = max(count, maxCount)
-            previousValue = card.value()
-        }
-        return maxCount
-    }
-
-    /**
      * Improved counting of streets for Gem Of Order.
      * @return List - Collection of street lengths
      */
@@ -187,12 +165,6 @@ class Game(val noScoring: Boolean = false) {
         }
 
         return result
-    }
-
-    fun largestSuitWithDifferentNames(): Int {
-        return groupNotBlankedCardsBySuit()
-            .map { entry -> entry.key to entry.value.distinct() }.toMap()
-            .map { it.value.size }.maxOrNull() ?: 0
     }
 
     fun countSuitsWithDifferentNames(): List<Int> {

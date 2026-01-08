@@ -102,14 +102,6 @@ object AllRules {
                 )
             ) { if (it.atLeastOneHandCardOf(Suit.LEADER) && it.containsHandCards(swordOfKeth)) 25 else 0 }
         ),
-        /*
-        gemOfOrder to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) {
-                mapOf(3 to 10, 4 to 30, 5 to 60, 6 to 100, 7 to 150, 8 to 150)[it.longestSuite()]
-                    ?: 0
-            }
-        ),
-         */
         gemOfOrder to listOf(
           RuleAboutScore(listOf(Effect.BONUS)) {
             val streets = it.countStreetsWithSideCards()
@@ -490,21 +482,6 @@ object AllRules {
                 (it.countHandCards(Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME)) * 5
             }
         ),
-        /*
-        collector to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) {
-                mapOf(
-                    3 to 10,
-                    4 to 40,
-                    5 to 100,
-                    6 to 100,
-                    7 to 100,
-                    8 to 100,
-                    9 to 100
-                )[it.largestSuitWithDifferentNames()] ?: 0
-            }
-        ),
-         */
         collector to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
                 val suits = it.countSuitsWithDifferentNames()
