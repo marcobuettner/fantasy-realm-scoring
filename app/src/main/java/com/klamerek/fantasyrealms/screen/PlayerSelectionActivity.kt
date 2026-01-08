@@ -207,6 +207,17 @@ class PlayerSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    @Subscribe
+    fun clearDiscardArea(event: ClearAllScoresEvent) {
+        runOnUiThread {
+            DiscardArea.instance.game().clear()
+            val text = Strings.get(R.string.x_cards, DiscardArea.instance.game().actualHandSize())
+            binding.discardItem.scoreLabel.text = text
+            adapter.notifyDataSetChanged()
+        }
+    }
+
     @Subscribe
     fun editPlayer(event: PlayerEditEvent) {
         val handSelectionIntent = Intent(this, HandSelectionActivity::class.java)
