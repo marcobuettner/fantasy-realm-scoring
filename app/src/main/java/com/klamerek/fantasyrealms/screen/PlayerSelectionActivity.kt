@@ -120,6 +120,7 @@ class PlayerSelectionActivity : CustomActivity() {
         setUpListeners()
 
         binding.discardItem.playerNameField.text = getString(R.string.discard_area)
+        binding.discardItem.totalScore.visibility = View.GONE
 
         val linearLayoutManager = LinearLayoutManager(this)
         binding.playersView.addItemDecoration(
@@ -165,7 +166,7 @@ class PlayerSelectionActivity : CustomActivity() {
     @Subscribe
     fun addPlayer(event: PlayerCreationEvent) {
         runOnUiThread {
-            Player.all.add(Player(event.name, Game()))
+            Player.all.add(Player(event.name, Game(), 0))
             adapter.notifyDataSetChanged()
         }
     }
@@ -202,7 +203,10 @@ class PlayerSelectionActivity : CustomActivity() {
     @Subscribe
     fun clearPlayers(event: ClearAllScoresEvent) {
         runOnUiThread {
-            Player.all.forEach { it.game().clear() }
+            Player.all.forEach {
+                it.addScore(it.game().score())
+                it.game().clear()
+            }
             adapter.notifyDataSetChanged()
         }
     }
@@ -274,6 +278,7 @@ class PlayerSelectionAdapter(private val players: Collection<Player>) :
             view.playerNameField.text = player.name()
             player.game().calculate()
             view.scoreLabel.text = player.game().score().toString()
+            view.totalScore.text = player.totalScore.toString()
             view.editButton.setOnClickListener {
                 EventBus.getDefault().post(PlayerEditEvent(player))
             }

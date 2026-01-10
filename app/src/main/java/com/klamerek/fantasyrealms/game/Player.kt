@@ -1,12 +1,14 @@
 package com.klamerek.fantasyrealms.game
 
+import android.util.Log
+
 /**
  * A player with a name and a list of cards (from a game)
  *
  * @property name
  * @property game
  */
-class Player(private var name: String, private val game: Game) : WithGame {
+class Player(private var name: String, private val game: Game, override var totalScore: Int) : WithGame {
 
     companion object {
         val all: MutableList<Player> = ArrayList()
@@ -27,7 +29,16 @@ class Player(private var name: String, private val game: Game) : WithGame {
         this.name = name
     }
 
-    override fun name(): String = name;
+    fun addScore(score: Int) {
+        if(this.totalScore == 0) {
+            this.totalScore = score
+            return
+        }
+        this.totalScore += score
+        Log.v("PLAYER_SCORE", "${this.name} := ${this.totalScore}")
+    }
 
-    override fun game(): Game = game;
+    override fun name(): String = name
+
+    override fun game(): Game = game
 }

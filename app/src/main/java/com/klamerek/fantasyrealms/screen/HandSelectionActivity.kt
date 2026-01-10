@@ -40,7 +40,7 @@ class HandSelectionActivity : CustomActivity() {
     override fun onResume() {
         super.onResume()
         if (!isActivityTransitionRunning && !cancelOnResumeAnimation) {
-            binding.handView.scheduleLayoutAnimation();
+            binding.handView.scheduleLayoutAnimation()
         }
         cancelOnResumeAnimation = false
     }
@@ -125,7 +125,7 @@ class HandSelectionActivity : CustomActivity() {
                 DiscardArea.instance
             }
             Player.all.isEmpty() -> {
-                Player.all.add(Player(Player.generateNextPlayerName(), Game()))
+                Player.all.add(Player(Player.generateNextPlayerName(), Game(), 0))
                 Player.all[0]
             }
             Player.all.size <= index -> {
@@ -254,11 +254,11 @@ class HandSelectionAdapter(private val withGame: WithGame, private val displayCa
             updateDetailPart(card)
         }
 
-        fun getTransitionComponent(): android.util.Pair<View?, String?> {
-            return android.util.Pair.create<View?, String?>(
+        fun getTransitionComponent(): Pair<View?, String?> {
+            return Pair.create<View?, String?>(
                 view.cardNameLabel,
                 view.cardNameLabel.transitionName
-            );
+            )
         }
 
         @SuppressLint("SetTextI18n")
