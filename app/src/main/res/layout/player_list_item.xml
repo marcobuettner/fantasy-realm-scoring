@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -32,20 +33,33 @@
             android:visibility="visible" />
     </LinearLayout>
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
     <TextView
         android:id="@+id/scoreLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="16"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_weight="18"
+        android:gravity="center|end"
+        android:textAlignment="textEnd"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/editButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="20"
-        android:text="@string/edit_button" />
+        android:layout_weight="26"
+        android:maxWidth="22dp"
+        android:text="@string/edit_button"
+        tools:ignore="VisualLintButtonSize" />
 
 </LinearLayout>
